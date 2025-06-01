@@ -5,7 +5,7 @@ const preguntas = [
             { texto: "Splinter Cell", correcta: false },
             { texto: "Metal Gear Solid", correcta: true },
             { texto: "Hitman", correcta: false },
-            { texto: "Ghost Recon", correcta: false }
+            { texto: "Ghost Recon", correcta: false },
         ]
     },
     {
@@ -14,7 +14,7 @@ const preguntas = [
             { texto: "Dante", correcta: false },
             { texto: "Kratos", correcta: true },
             { texto: "Ares", correcta: false },
-            { texto: "Leon", correcta: false }
+            { texto: "Leon", correcta: false },
         ]
     },
     {
@@ -23,7 +23,7 @@ const preguntas = [
             { texto: "Ubisoft", correcta: false },
             { texto: "Rockstar Games", correcta: true },
             { texto: "Activision", correcta: false },
-            { texto: "Electronic Arts", correcta: false }
+            { texto: "Electronic Arts", correcta: false },
         ]
     },
     {
@@ -32,7 +32,7 @@ const preguntas = [
             { texto: "2010", correcta: false },
             { texto: "2011", correcta: true },
             { texto: "2012", correcta: false },
-            { texto: "2013", correcta: false }
+            { texto: "2013", correcta: false },
         ]
     },
     {
@@ -41,7 +41,7 @@ const preguntas = [
             { texto: "Halo", correcta: false },
             { texto: "Uncharted", correcta: false },
             { texto: "The Legend of Zelda", correcta: true },
-            { texto: "The Last of Us", correcta: false }
+            { texto: "The Last of Us", correcta: false },
         ]
     },
     {
@@ -50,7 +50,7 @@ const preguntas = [
             { texto: "Bloodborne", correcta: true },
             { texto: "Far Cry 3", correcta: false },
             { texto: "Overwatch", correcta: false },
-            { texto: "Tomb Raider", correcta: false }
+            { texto: "Tomb Raider", correcta: false },
         ]
     },
     {
@@ -59,7 +59,7 @@ const preguntas = [
             { texto: "Grand Theft Auto: San Andreas", correcta: false },
             { texto: "Grand Theft Auto III", correcta: false },
             { texto: "Grand Theft Auto: Vice City", correcta: true },
-            { texto: "Grand Theft Auto V", correcta: false }
+            { texto: "Grand Theft Auto V", correcta: false },
         ]
     },
     {
@@ -68,7 +68,7 @@ const preguntas = [
             { texto: "Dr. Eggman", correcta: false },
             { texto: "Bowser", correcta: true },
             { texto: "Wario", correcta: false },
-            { texto: "Ridley", correcta: false }
+            { texto: "Ridley", correcta: false },
         ]
     },
     {
@@ -77,7 +77,7 @@ const preguntas = [
             { texto: "Mario Kart 8 Deluxe", correcta: false },
             { texto: "The Legend of Zelda: Breath of the Wild", correcta: true },
             { texto: "Super Smash Bros. Ultimate", correcta: false },
-            { texto: "Pokémon Sword and Shield", correcta: false }
+            { texto: "Pokémon Sword and Shield", correcta: false },
         ]
     }
 ];
