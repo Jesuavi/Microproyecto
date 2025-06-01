@@ -5,13 +5,44 @@
     box-sizing: border-box;
 }
 body{
-    background: #001E4D;
+    background: #631414;
 }
 .app{
-    background: #fff;
+    background: #ffffff;
     width: 90%;
     max-width: 600px;
     margin: 100px auto 0;
     padding: 30px;
-    border-radius: 16px;
+    border-radius: 10px;
+}
+
+.app h1 {
+
+    font-size: 30px;
+    color: #141010;
+    font-weight: 600;
+    border-bottom: 2px solid #d40000;
+    padding-bottom: 30px;
+}
+
+.quiz{
+    padding: 20px 0;
+}
+
+.quiz h2{
+    font-size: 20px;
+    color: #141010;
+    font-weight: 600;
+}
+.btn{    
+    background: #bebebe;
+    width: 100%;
+    border: 2px solid #141010;
+    color: #222b2b;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 750;
+    margin-top: 11px;
+    text-align: left;
+    
 }
