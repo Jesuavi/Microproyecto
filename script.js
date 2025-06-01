@@ -1,7 +1,7 @@
 const preguntas = [
     {
         pregunta: "¿En qué videojuego aparece el personaje de Solid Snake como protagonista?",
-        respuestas: [
+        respuesta: [
             { texto: "Splinter Cell", correcta: false },
             { texto: "Metal Gear Solid", correcta: true },
             { texto: "Hitman", correcta: false },
@@ -10,7 +10,7 @@ const preguntas = [
     },
     {
         pregunta: "¿Cuál es el nombre del protagonista de la saga God of War?",
-        respuestas: [
+        respuesta: [
             { texto: "Dante", correcta: false },
             { texto: "Kratos", correcta: true },
             { texto: "Ares", correcta: false },
@@ -19,7 +19,7 @@ const preguntas = [
     },
     {
         pregunta: "¿Qué desarrolladora creó el juego Grand Theft Auto V?",
-        respuestas: [
+        respuesta: [
             { texto: "Ubisoft", correcta: false },
             { texto: "Rockstar Games", correcta: true },
             { texto: "Activision", correcta: false },
@@ -28,7 +28,7 @@ const preguntas = [
     },
     {
         pregunta: "¿En qué año se lanzó el juego The Elder Scrolls V: Skyrim?",
-        respuestas: [
+        respuesta: [
             { texto: "2010", correcta: false },
             { texto: "2011", correcta: true },
             { texto: "2012", correcta: false },
@@ -37,7 +37,7 @@ const preguntas = [
     },
     {
         pregunta: "¿Cuál de estos juegos es un título exclusivo de Nintendo?",
-        respuestas: [
+        respuesta: [
             { texto: "Halo", correcta: false },
             { texto: "Uncharted", correcta: false },
             { texto: "The Legend of Zelda", correcta: true },
@@ -46,7 +46,7 @@ const preguntas = [
     },
     {
         pregunta: "¿Cuál de estos juegos pertenece al género Soulslike?",
-        respuestas: [
+        respuesta: [
             { texto: "Bloodborne", correcta: true },
             { texto: "Far Cry 3", correcta: false },
             { texto: "Overwatch", correcta: false },
@@ -55,7 +55,7 @@ const preguntas = [
     },
     {
         pregunta: "¿En qué juego puedes encontrar la ciudad de Vice City?",
-        respuestas: [
+        respuesta: [
             { texto: "Grand Theft Auto: San Andreas", correcta: false },
             { texto: "Grand Theft Auto III", correcta: false },
             { texto: "Grand Theft Auto: Vice City", correcta: true },
@@ -64,7 +64,7 @@ const preguntas = [
     },
     {
         pregunta: "¿Cómo se llama el icónico enemigo de la saga Super Mario Bros.?",
-        respuestas: [
+        respuesta: [
             { texto: "Dr. Eggman", correcta: false },
             { texto: "Bowser", correcta: true },
             { texto: "Wario", correcta: false },
@@ -72,14 +72,76 @@ const preguntas = [
         ]
     },
     {
-        pregunta: "¿Qué juego fue el título de lanzamiento más exitoso en la historia de Nintendo Switch?",
-        respuestas: [
-            { texto: "Mario Kart 8 Deluxe", correcta: false },
-            { texto: "The Legend of Zelda: Breath of the Wild", correcta: true },
-            { texto: "Super Smash Bros. Ultimate", correcta: false },
-            { texto: "Pokémon Sword and Shield", correcta: false },
+        pregunta: "¿Cuál fue la primera consola de videojuegos creada en la historia?",
+        respuesta: [
+            { texto: "Atari 2600", correcta: false },
+            { texto: "Magnavox Odyssey", correcta: true },
+            { texto: "Nintendo Entertainment System (NES)", correcta: false },
+            { texto: "Sega Genesis", correcta: false },
         ]
     }
 ];
 
+const preguntaElemento = document.getElementById('pregunta');
+const botonesRespuesta = document.getElementById('botones_respuesta');
+const botonSiguiente = document.getElementById('boton_siguiente');
 
+let indicePreguntaActual = 0;
+let puntaje = 0;
+
+function iniciarQuiz() {
+    indicePreguntaActual = 0;
+    puntaje = 0;
+    botonSiguiente.innerHTML = "Siguiente";
+    mostrarPregunta();
+}
+
+function mostrarPregunta() {
+    resetState();
+    let preguntaActual = preguntas[indicePreguntaActual]; // Cambiado 'pregunta' por 'preguntas'
+    let numeroPregunta = indicePreguntaActual + 1;
+    preguntaElemento.innerHTML = numeroPregunta + ". " + preguntaActual.pregunta;
+
+    preguntaActual.respuesta.forEach(respuesta => { // Cambiado 'respuestas' por 'respuesta'
+        const button = document.createElement('button');
+        button.innerHTML = respuesta.texto;
+        button.classList.add('btn');
+        botonesRespuesta.appendChild(button);
+        if (respuesta.correcta) {
+            button.dataset.correct = respuesta.correcta;
+        }
+        button.addEventListener("click",seleccionarRespuesta);
+    });
+}
+
+function resetState() {
+    botonSiguiente.style.display = 'none';
+    while (botonesRespuesta.firstChild) {
+        botonesRespuesta.removeChild(botonesRespuesta.firstChild);
+    }
+}
+
+function seleccionarRespuesta(e) {
+    const selectedButton = e.target;
+    const correct = selectedButton.dataset.correct === "true";
+
+    if (correct) {
+        selectedButton.classList.add('correcto');
+        puntaje++;
+    } else {
+        selectedButton.classList.add('incorrecto');
+    }
+
+    Array.from(botonesRespuesta.children).forEach(button => {
+        if (button.dataset.correct === "true") {
+            button.classList.add('correcto');
+        } 
+        button.disabled = true;
+    });
+
+    botonSiguiente.style.display = 'block';
+}
+
+
+
+iniciarQuiz();
