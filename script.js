@@ -79,6 +79,15 @@ const preguntas = [
             { texto: "Nintendo Entertainment System (NES)", correcta: false },
             { texto: "Sega Genesis", correcta: false },
         ]
+    },
+    {
+        pregunta: "¿Qué juego de rol japonés es conocido por su sistema de combate por turnos y sus invocaciones?",
+        respuesta: [
+            { texto: "Final Fantasy VII", correcta: true },
+            { texto: "Persona 5", correcta: false },
+            { texto: "Dragon Quest XI", correcta: false },
+            { texto: "Chrono Trigger", correcta: false },
+        ]
     }
 ];
 
@@ -142,6 +151,28 @@ function seleccionarRespuesta(e) {
     botonSiguiente.style.display = 'block';
 }
 
+function siguientePregunta() {
+    indicePreguntaActual++;
+    if (indicePreguntaActual < preguntas.length) {
+        mostrarPregunta();
+    } else {
+        mostrarPuntaje();
+    }
+}
+
+// Agrega este event listener después de definir la función:
+botonSiguiente.addEventListener("click", siguientePregunta);
+
+// Agrega esta función para mostrar el puntaje final:
+function mostrarPuntaje() {
+    resetState();
+    preguntaElemento.innerHTML = `¡Quiz terminado!<br>Tu puntaje es ${puntaje} de ${preguntas.length}.`;
+    botonSiguiente.innerHTML = "Reiniciar";
+    botonSiguiente.style.display = "block";
+    botonSiguiente.onclick = function() {
+        iniciarQuiz();
+    };
+}
 
 
 iniciarQuiz();
