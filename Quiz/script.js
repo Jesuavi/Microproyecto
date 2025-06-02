@@ -171,16 +171,25 @@ function siguientePregunta() {
 }
 
 
+
 botonSiguiente.addEventListener("click", siguientePregunta);
 
 
 function mostrarPuntaje() {
     resetState();
-    preguntaElemento.innerHTML = `¡Quiz terminado!<br>Tu puntaje es ${puntaje} de ${preguntas.length}.`;
+    // Obtener usuario y contraseña del LocalStorage
+    const usuario = localStorage.getItem("usuario") || "Desconocido";
+    const contraseña = localStorage.getItem("contraseña") || "No disponible";
+    preguntaElemento.innerHTML = `
+        ¡Quiz terminado!<br>
+        Tu puntaje es ${puntaje} de ${preguntas.length}.<br><br>
+        <strong>Usuario:</strong> ${usuario}<br>
+        <strong>Contraseña:</strong> ${contraseña}
+    `;
     botonSiguiente.innerHTML = "Reiniciar";
     botonSiguiente.style.display = "block";
     botonSiguiente.onclick = function() {
-        iniciarQuiz();
+        window.location.href = "../Login/login.html";
     };
     if (timerInterval) clearInterval(timerInterval); 
 }

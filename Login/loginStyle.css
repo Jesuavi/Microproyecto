@@ -9,6 +9,7 @@ body{
     background: #631414;
 }
 
+
 .box{
     background: #ffffff;
     width: 90%;
@@ -17,6 +18,17 @@ body{
     padding: 30px;
     border-radius: 10px;
 }
+
+
+
+.img-user {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+}
+
 
 form {
     display: flex;
