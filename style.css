@@ -16,6 +16,14 @@ body{
     border-radius: 10px;
 }
 
+#timer{
+    font-size: 40px;
+    color: #141010;
+    font-weight: 600;
+    text-align: right;
+    margin-bottom: 0px;
+}
+
 .app h1 {
 
     font-size: 30px;

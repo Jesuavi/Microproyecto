@@ -94,24 +94,33 @@ const preguntas = [
 const preguntaElemento = document.getElementById('pregunta');
 const botonesRespuesta = document.getElementById('botones_respuesta');
 const botonSiguiente = document.getElementById('boton_siguiente');
+const timerElemento = document.getElementById('timer');
+
+const inicioTiempo = 5; 
 
 let indicePreguntaActual = 0;
 let puntaje = 0;
+let tiempoRestante = inicioTiempo * 60;
+let timerInterval; 
+
 
 function iniciarQuiz() {
     indicePreguntaActual = 0;
     puntaje = 0;
+    tiempoRestante = inicioTiempo * 60;
     botonSiguiente.innerHTML = "Siguiente";
     mostrarPregunta();
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(actualizarTiempo, 1000); 
 }
 
 function mostrarPregunta() {
     resetState();
-    let preguntaActual = preguntas[indicePreguntaActual]; // Cambiado 'pregunta' por 'preguntas'
+    let preguntaActual = preguntas[indicePreguntaActual];
     let numeroPregunta = indicePreguntaActual + 1;
     preguntaElemento.innerHTML = numeroPregunta + ". " + preguntaActual.pregunta;
 
-    preguntaActual.respuesta.forEach(respuesta => { // Cambiado 'respuestas' por 'respuesta'
+    preguntaActual.respuesta.forEach(respuesta => { 
         const button = document.createElement('button');
         button.innerHTML = respuesta.texto;
         button.classList.add('btn');
@@ -155,15 +164,16 @@ function siguientePregunta() {
     indicePreguntaActual++;
     if (indicePreguntaActual < preguntas.length) {
         mostrarPregunta();
+        
     } else {
         mostrarPuntaje();
     }
 }
 
-// Agrega este event listener después de definir la función:
+
 botonSiguiente.addEventListener("click", siguientePregunta);
 
-// Agrega esta función para mostrar el puntaje final:
+
 function mostrarPuntaje() {
     resetState();
     preguntaElemento.innerHTML = `¡Quiz terminado!<br>Tu puntaje es ${puntaje} de ${preguntas.length}.`;
@@ -172,6 +182,20 @@ function mostrarPuntaje() {
     botonSiguiente.onclick = function() {
         iniciarQuiz();
     };
+    if (timerInterval) clearInterval(timerInterval); 
+}
+
+function actualizarTiempo() {
+    const minutos = Math.floor(tiempoRestante / 60);
+    const segundos = tiempoRestante % 60;
+    timerElemento.innerHTML = `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+    
+    if (tiempoRestante === 0) {
+        clearInterval(timerInterval);
+        mostrarPuntaje();
+    } else {
+        tiempoRestante--;
+    }
 }
 
 
