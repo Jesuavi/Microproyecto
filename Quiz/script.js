@@ -90,7 +90,7 @@ const bancoPreguntasCompleto = [
             { texto: "Chrono Trigger", correcta: false },
         ]
     },
-    //  NUEVAS PREGUNTAS AGREGADAS 
+
     {
         pregunta: "¿Cuál es la moneda virtual utilizada en el juego Fortnite?",
         respuesta: [
@@ -151,7 +151,8 @@ let indicePreguntaActual = 0;
 let puntaje = 0;
 let tiempoRestante = inicioTiempo * 60;
 let timerInterval;
-let preguntasSeleccionadas = []; // Array que contendrá las 10 preguntas aleatorias
+let preguntasSeleccionadas = []; 
+let respuestasUsuario = []; // <-- Agrega esto
 
 //  FUNCIÓN PARA SELECCIONAR PREGUNTAS ALEATORIAS 
 function seleccionarPreguntasAleatorias() {
@@ -218,6 +219,7 @@ function iniciarQuiz() {
     puntaje = 0;
     tiempoRestante = inicioTiempo * 60;
     botonSiguiente.innerHTML = "Siguiente";
+    respuestasUsuario = []; // <-- Reinicia el array aquí
     
     // Iniciar quiz
     mostrarPregunta();
@@ -256,6 +258,18 @@ function seleccionarRespuesta(e) {
     const selectedButton = e.target;
     const correct = selectedButton.dataset.correct === "true";
 
+    // Guarda la respuesta seleccionada y la correcta
+    const preguntaActual = preguntasSeleccionadas[indicePreguntaActual];
+    const respuestaSeleccionada = selectedButton.innerHTML;
+    const respuestaCorrecta = preguntaActual.respuesta.find(r => r.correcta).texto;
+
+    respuestasUsuario.push({
+        pregunta: preguntaActual.pregunta,
+        seleccionada: respuestaSeleccionada,
+        correcta: respuestaCorrecta,
+        esCorrecta: correct
+    });
+
     if (correct) {
         selectedButton.classList.add('correcto');
         puntaje++;
@@ -288,10 +302,31 @@ function mostrarPuntaje() {
     const usuario = localStorage.getItem("usuario") || "Desconocido";
     guardarPuntaje(usuario, puntaje);
 
+    // Resumen de puntaje
     preguntaElemento.innerHTML = `¡Quiz terminado!<br><br>
         <strong>${usuario}</strong>, tu puntaje es:<br>
         <span style="font-size:2em">${puntaje} / ${TOTAL_PREGUNTAS_QUIZ}</span>`;
 
+    // Resumen de preguntas y respuestas
+    const resumenDiv = document.createElement('div');
+    resumenDiv.style.marginTop = "30px";
+    resumenDiv.innerHTML = "<h3>Resumen de tus respuestas:</h3>";
+
+    respuestasUsuario.forEach((item, idx) => {
+        let color = item.esCorrecta ? "#0ecc0e" : "#d10303";
+        let html = `<div style="margin-bottom:18px;">
+            <strong>${idx + 1}. ${item.pregunta}</strong><br>
+            <span style="color:${color};">Tu respuesta: ${item.seleccionada}</span>`;
+        if (!item.esCorrecta) {
+            html += `<br><span style="color:#0ecc0e;">Respuesta correcta: ${item.correcta}</span>`;
+        }
+        html += "</div>";
+        resumenDiv.innerHTML += html;
+    });
+
+    preguntaElemento.parentNode.appendChild(resumenDiv);
+
+    // Botones de acción
     const botonesContainer = document.createElement('div');
     botonesContainer.style.cssText = `
         display: flex;
@@ -352,19 +387,18 @@ function actualizarTiempo() {
     const minutos = Math.floor(tiempoRestante / 60);
     const segundos = tiempoRestante % 60;
     timerElemento.innerHTML = `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+    botonSiguiente.addEventListener("click", siguientePregunta);
     
     if (tiempoRestante === 0) {
         clearInterval(timerInterval);
+        iniciarQuiz();
         mostrarPuntaje();
     } else {
         tiempoRestante--;
     }
 }
 
-// Event listener para el botón siguiente
-botonSiguiente.addEventListener("click", siguientePregunta);
-
 // Iniciar el quiz con preguntas aleatorias
 iniciarQuiz();
 
-
+botonSiguiente.addEventListener("click", siguientePregunta); // Event listener para el botón siguiente
