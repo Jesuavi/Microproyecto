@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login_Microproyecto</title>
+    <link rel="stylesheet" href="loginStyle.css">
+    <script src="scripLogin.js" defer></script>
+</head>
+<body>
+    <div class="box">
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="img-user" class="img-user">
+        
+        <!-- PANTALLA 1: LOGIN -->
+        <div id="loginScreen" class="screen active">
+            <!-- TOP DE PUNTAJES -->
+            <div class="top-scores" id="topScores">
+                <h3>🏆 Top 5 Mejores Puntajes</h3>
+                <div class="scores-table" id="scoresTable">
+                    <!-- Los puntajes se cargarán aquí dinámicamente -->
+                </div>
+            </div>
+            
+            <form id="loginForm">
+                <div class="inputBox">
+                    <input type="text" id="usuario" required placeholder=" ">
+                    <label for="usuario">Usuario</label>
+                </div>
+                <div class="inputBox">
+                    <input type="password" id="contraseña" required placeholder=" ">
+                    <label for="contraseña">Contraseña</label>
+                </div>
+                <div class="box-visible">
+                    <input type="checkbox" id="mostrar-contraseña">
+                    <label for="mostrar-contraseña">Mostrar contraseña</label>
+                </div>
+                <button type="submit" id="submit">Iniciar sesión</button>
+            </form>
+        </div>
+
+        <!-- PANTALLA 2: MENÚ INTERMEDIO -->
+        <div id="menuScreen" class="screen hidden">
+            <div class="welcome-section">
+                <h2>🎮 ¡Bienvenido!</h2>
+                <p class="welcome-message">
+                    Hola <span id="welcomeUser"></span>, estás listo para el 
+                    <strong>Gaming Quiz</strong>
+                </p>
+            </div>
+
+            <div class="action-buttons">
+                <button id="iniciarQuizBtn" class="btn-primary">
+                    🚀 Iniciar Quiz
+                </button>
+                <button id="verPuntajesBtn" class="btn-secondary">
+                    📊 Ver Puntajes
+                </button>
+                <button id="cambiarUsuarioBtn" class="btn-tertiary">
+                    👤 Cambiar Usuario
+                </button>
+            </div>
+        </div>
+
+        <!-- PANTALLA 3: VER PUNTAJES DETALLADOS -->
+        <div id="scoresScreen" class="screen hidden">
+            <div class="scores-header">
+                <h2>🏆 Historial de Puntajes</h2>
+                <p>Todos los puntajes registrados</p>
+            </div>
+            
+            <div class="detailed-scores" id="detailedScores">
+                <!-- Los puntajes detallados se cargarán aquí -->
+            </div>
+
+            <div class="action-buttons">
+                <button id="volverMenuBtn" class="btn-secondary">
+                    ⬅️ Volver al Menú
+                </button>
+                <button id="limpiarPuntajesBtn" class="btn-danger">
+                    🗑️ Limpiar Puntajes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay de carga para transiciones -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Preparando el quiz...</p>
+        </div>
+    </div>
+</body>
+</html>

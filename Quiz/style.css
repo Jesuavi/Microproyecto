@@ -15,6 +15,21 @@ body{
     padding: 30px;
     border-radius: 10px;
 }
+#volverMenu {
+    background: transparent;
+    border: 1px solid #141010;
+    color: #141010;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+}
+
+#volverMenu:hover {
+    background: #eee;
+}
 
 #timer{
     font-size: 40px;
@@ -25,7 +40,6 @@ body{
 }
 
 .app h1 {
-
     font-size: 30px;
     color: #141010;
     font-weight: 600;
@@ -42,6 +56,7 @@ body{
     color: #141010;
     font-weight: 600;
 }
+
 .btn{    
     background: #bebebe;
     width: 100%;
@@ -53,12 +68,16 @@ body{
     margin-top: 11px;
     text-align: left;
     cursor: pointer;
-    transition: all 0.3s ;
+    transition: all 0.3s;
 }
 
-.btn:hover{
+.btn:hover:not(:disabled){
     background: #000000;
     color: #ffffff;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
 }
 
 #boton_siguiente{
@@ -67,27 +86,88 @@ body{
     font-weight: 600;
     width: 150px;
     border: 2px solid #141010;
-    padding: 10px ;
+    padding: 10px;
     margin: 50px auto 0;
     border-radius: 30px;
     cursor: pointer;
     display: none;
 }
 
+#boton_siguiente:hover {
+    background: #5a0a95;
+}
+
 .correcto{
-    background: #0ecc0e;
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-weight: 600;
-    margin-top: 20px;
+    background: #0ecc0e !important;
+    color: #ffffff !important;
+    border-color: #0ecc0e !important;
 }
 
 .incorrecto{
-    background: #d10303;
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 30px;
+    background: #d10303 !important;
+    color: #ffffff !important;
+    border-color: #d10303 !important;
+}
+
+/* Estilos para los botones de resultado */
+.resultado-botones {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.boton-resultado {
     font-weight: 600;
-    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.boton-nuevo-quiz {
+    background: #0ecc0e;
+    color: white;
+}
+
+.boton-nuevo-quiz:hover {
+    background: #0ba80b;
+}
+
+.boton-menu {
+    background: #631414;
+    color: white;
+}
+
+.boton-menu:hover {
+    background: #a83232;
+}
+
+/* Estilo para el mensaje de resultado */
+.resultado-mensaje {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.resultado-mensaje h2 {
+    color: #631414;
+    margin-bottom: 15px;
+}
+
+.resultado-mensaje p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.puntaje-guardado {
+    color: #0ecc0e;
+    font-weight: bold;
+    font-size: 14px;
 }
