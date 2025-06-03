@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const inputPassword = document.getElementById("contraseña");
     const inputUsuario = document.getElementById("usuario");
     const loginForm = document.getElementById("loginForm");
+    const crearNuevoUsuarioCheckbox = document.getElementById("crear-nuevo-usuario");
     
     // Pantallas
     const loginScreen = document.getElementById("loginScreen");
@@ -78,18 +79,38 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        mostrarCarga(true, "Validando credenciales...");
-
-        // Obtener usuario y contraseña antes del setTimeout
         const usuario = inputUsuario.value.trim();
         const contraseña = inputPassword.value.trim();
 
-        // Simular validación (puedes agregar lógica real aquí)
-        setTimeout(() => {
-            // Guardar credenciales
-            localStorage.setItem("usuario", usuario);
-            localStorage.setItem("contraseña", contraseña);
+        if (crearNuevoUsuarioCheckbox.checked) {
+            // Registro de nuevo usuario
+            if (usuarioExiste(usuario)) {
+                alert("Ese nombre de usuario ya existe. Elige otro.");
+                return;
+            }
+            registrarUsuario(usuario, contraseña);
+            alert("Usuario creado exitosamente. Ahora puedes iniciar sesión.");
+            crearNuevoUsuarioCheckbox.checked = false;
+            inputUsuario.value = "";
+            inputPassword.value = "";
+            return;
+        } else {
+            // Validación de login
+            if (!usuarioExiste(usuario)) {
+                alert("El usuario no existe. Marca 'Crear nuevo usuario' para registrarte.");
+                return;
+            }
+            if (!validarCredenciales(usuario, contraseña)) {
+                alert("Contraseña incorrecta.");
+                return;
+            }
+        }
 
+        mostrarCarga(true, "Validando credenciales...");
+
+        setTimeout(() => {
+            // Guardar usuario logueado
+            localStorage.setItem("usuario", usuario);
             mostrarCarga(false);
             mostrarMenu(usuario);
         }, 1000);
@@ -205,6 +226,31 @@ document.addEventListener("DOMContentLoaded", function() {
             
             alert("✅ Todos los puntajes han sido eliminados.");
         }
+    }
+
+    // FUNCIONES DE USUARIOS
+    function obtenerUsuarios() {
+        return JSON.parse(localStorage.getItem("usuariosQuiz")) || [];
+    }
+
+    function guardarUsuarios(usuarios) {
+        localStorage.setItem("usuariosQuiz", JSON.stringify(usuarios));
+    }
+
+    function registrarUsuario(usuario, contraseña) {
+        const usuarios = obtenerUsuarios();
+        usuarios.push({ usuario, contraseña });
+        guardarUsuarios(usuarios);
+    }
+
+    function usuarioExiste(usuario) {
+        const usuarios = obtenerUsuarios();
+        return usuarios.some(u => u.usuario === usuario);
+    }
+
+    function validarCredenciales(usuario, contraseña) {
+        const usuarios = obtenerUsuarios();
+        return usuarios.some(u => u.usuario === usuario && u.contraseña === contraseña);
     }
 
     // FUNCIÓN AUXILIAR
