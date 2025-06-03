@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
         mostrarCarga(true, "Iniciando Gaming Quiz...");
         
         setTimeout(() => {
-            window.location.href = "Quiz/quiz.html"; // <-- Corrige aquí la ruta
+            window.location.href = "quiz.html"; // <-- Corrige aquí la ruta
         }, 1000);
     }
 
