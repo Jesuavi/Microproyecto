@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
         mostrarCarga(true, "Iniciando Gaming Quiz...");
         
         setTimeout(() => {
-            window.location.href = "/Microproyecto/Quiz/quiz.html";
+            window.location.href = "Quiz/quiz.html";
         }, 1000);
     }
 
