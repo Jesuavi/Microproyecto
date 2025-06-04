@@ -371,7 +371,7 @@ function mostrarPuntaje() {
     botonMenu.onmouseover = () => botonMenu.style.background = '#a83232';
     botonMenu.onmouseout = () => botonMenu.style.background = '#631414';
     botonMenu.onclick = function() {
-        window.location.href = "../Login/index.html";
+        window.location.href = "Quiz/quiz.html";
     };
 
     botonesContainer.appendChild(botonNuevoQuiz);
@@ -398,7 +398,7 @@ function actualizarTiempo() {
     }
 }
 
-// Iniciar el quiz con preguntas aleatorias
+// Iniciar el quiz with preguntas aleatorias
 iniciarQuiz();
 
 botonSiguiente.addEventListener("click", siguientePregunta); // Event listener para el botón siguiente
