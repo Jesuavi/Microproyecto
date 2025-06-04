@@ -371,7 +371,7 @@ function mostrarPuntaje() {
     botonMenu.onmouseover = () => botonMenu.style.background = '#a83232';
     botonMenu.onmouseout = () => botonMenu.style.background = '#631414';
     botonMenu.onclick = function() {
-        window.location.href = "Quiz/quiz.html";
+        window.location.href = "../index.html"; // <--- CORRIGE AQUÍ
     };
 
     botonesContainer.appendChild(botonNuevoQuiz);
